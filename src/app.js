@@ -1,7 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
-const sequelize = require("./database/sequelize")
+// const sequelize = require("./database/sequelize")
 
 // API Version
 const VERSION = "v1"
@@ -29,9 +29,8 @@ app.use(`/${VERSION}/carts`, cartItemRouter)
 // TODO: Use logger here instead
 console.log(`Connecting to database...`)
 const modelPaths = ["../api/cart/models/", "../api/cartItem/models"]
-sequelize.connect(modelPaths)
-// Ensure tables exist
-sequelize.inst.sync()
+const db = require("./database/models")
+db.sequelize.sync()
 // TODO: Use logger here instead
 console.log("Done")
 
