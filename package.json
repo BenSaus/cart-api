@@ -1,0 +1,27 @@
+{
+    "name": "cartApi",
+    "version": "1.0.0",
+    "description": "",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "morgan": "^1.10.0",
+        "sequelize": "^6.3.5",
+        "sqlite3": "^5.0.0",
+        "uuid": "^8.3.1"
+    },
+    "devDependencies": {
+        "jest": "^26.6.3",
+        "sequelize-cli": "^6.2.0"
+    },
+    "scripts": {
+        "start": "node src/app.js",
+        "docker": "docker-compose up",
+        "develop": "nodemon src/app.js --watch ./src localhost 5050",
+        "seed": "node utils/syncSeed.js",
+        "test": "jest --silent"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
