@@ -1,4 +1,4 @@
-const sequelize = require("../../database/sequelize")
+const db = require("../../database/models")
 const controller = require("./controllers/cart")
 const express = require("express")
 const utils = require("../../utils/response")
@@ -8,7 +8,7 @@ const router = express.Router()
 router.post("/", async (req, res) => {
     let resp
     try {
-        resp = await controller.createCart({ db: sequelize.inst })
+        resp = await controller.createCart({ db })
     } catch (error) {
         // TODO: Use logger here instead
         console.error(error)
@@ -23,7 +23,7 @@ router.get("/:id", async (req, res) => {
     // TODO: Validate cart id here...
     let resp
     try {
-        resp = await controller.getCart({ db: sequelize.inst }, req.params.id)
+        resp = await controller.getCart({ db }, req.params.id)
     } catch (error) {
         // TODO: Use logger here instead
         console.error(error)

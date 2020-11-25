@@ -1,4 +1,4 @@
-const sequelize = require("../../database/sequelize")
+const db = require("../../database/models")
 const controller = require("./controllers/cartItem")
 const express = require("express")
 const router = express.Router()
@@ -11,7 +11,7 @@ router.post("/:id/items", async (req, res) => {
     let resp
     try {
         resp = await controller.addCartItem(
-            { db: sequelize.inst },
+            { db },
             { ...req.body.data, cartId }
         )
     } catch (error) {
@@ -31,7 +31,7 @@ router.delete("/:id/items/:cartItemId", async (req, res) => {
     let resp
     try {
         resp = await controller.removeCartItem(
-            { db: sequelize.inst },
+            { db },
             { cartItemId: req.params.cartItemId, cartId: req.params.id }
         )
     } catch (error) {
@@ -50,7 +50,7 @@ router.put("/:id/items/:cartItemId", async (req, res) => {
     let resp
     try {
         resp = await controller.updateCartItem(
-            { db: sequelize.inst },
+            { db },
             {
                 cartItemId: req.params.cartItemId,
                 cartId: req.params.id,
