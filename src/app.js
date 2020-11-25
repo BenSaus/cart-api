@@ -1,10 +1,8 @@
 require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
-// const sequelize = require("./database/sequelize")
-
-// API Version
-const VERSION = "v1"
+const constants = require("./constants")
+const db = require("./database/models")
 
 // Declare routes
 const errorHandlers = require("./errorHandlers/errorHandlers")
@@ -22,21 +20,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Setup routes
-app.use(`/${VERSION}/carts`, cartRouter)
-app.use(`/${VERSION}/carts`, cartItemRouter)
-
-// Setup Sequelize ORM
-// TODO: Use logger here instead
-console.log(`Connecting to database...`)
-const modelPaths = ["../api/cart/models/", "../api/cartItem/models"]
-const db = require("./database/models")
-db.sequelize.sync()
-// TODO: Use logger here instead
-console.log("Done")
-
-const port = process.env.PORT || 4000
-// TODO: Use logger here instead
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.use(`/${constants.VERSION}/carts`, cartRouter)
+app.use(`/${constants.VERSION}/carts`, cartItemRouter)
 
 // Error Handlers
 app.use(errorHandlers.error404)

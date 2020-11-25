@@ -4,8 +4,9 @@
         "dialect": "sqlite"
     },
     "test": {
-        "storage": ":memory",
-        "dialect": "sqlite"
+        "storage": "tmp/test.sqlite",
+        "dialect": "sqlite",
+        "logging": false
     },
     "production": {
         "storage": "tmp/prod.sqlite",
