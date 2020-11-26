@@ -74,4 +74,8 @@ describe("CartItems", () => {
 
         expect(res.statusCode).toEqual(200)
     })
+
+    afterAll(async () => {
+        await thisDb.sequelize.close()
+    })
 })

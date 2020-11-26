@@ -39,4 +39,8 @@ describe("Cart", () => {
         expect(getCartRes.body.data.type).toEqual("cart")
         expect(getCartRes.body.data.items.length).toEqual(0)
     })
+
+    afterAll(async () => {
+        await thisDb.sequelize.close()
+    })
 })
