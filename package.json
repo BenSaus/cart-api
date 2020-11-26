@@ -5,6 +5,8 @@
     "dependencies": {
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "express-validator": "^6.7.0",
+        "joi": "^17.3.0",
         "morgan": "^1.10.0",
         "sequelize": "^6.3.5",
         "sqlite3": "^5.0.0",
@@ -19,7 +21,7 @@
     "scripts": {
         "start": "node src/app.js",
         "docker": "docker-compose up",
-        "develop": "nodemon src/app.js --watch ./src localhost 5050",
+        "develop": "nodemon src/server/index.js --watch ./src localhost 4000",
         "test": "cross-env NODE_ENV=test jest"
     },
     "keywords": [],

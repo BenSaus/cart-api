@@ -5,11 +5,15 @@ const createResp = (data, statusCode) => {
     }
 }
 
-const createErrorResp = (data, statusCode) => {
+const createErrorResp = (errorArray, statusCode) => {
     return {
-        body: { error: { ...data } },
+        body: { errors: errorArray },
         status: statusCode,
     }
+}
+
+const createInternalServerError = () => {
+    return createErrorResp({ message: "Internal Server Error" }, 500)
 }
 
 const createEmptyResp = (statusCode) => {
@@ -23,4 +27,5 @@ module.exports = {
     createResp,
     createErrorResp,
     createEmptyResp,
+    createInternalServerError,
 }

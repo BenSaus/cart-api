@@ -27,4 +27,7 @@ app.use(`/${constants.VERSION}/carts`, cartItemRouter)
 app.use(errorHandlers.error404)
 app.use(errorHandlers.errorResponse)
 
+// Sync db tables
+db.sequelize.sync()
+
 module.exports = app

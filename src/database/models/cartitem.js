@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 allowNull: false,
             },
+            // Product Id is just a string for ease of testing, it would be a UUID in a production system
             productId: {
                 type: DataTypes.STRING,
                 allowNull: false,

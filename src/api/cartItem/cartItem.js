@@ -1,5 +1,5 @@
 const uuid = require("uuid").v4
-const utils = require("../../../utils/response")
+const utils = require("../../utils/response")
 
 const addCartItem = async (context, data) => {
     const { db } = context
@@ -42,12 +42,12 @@ const removeCartItem = async (context, data) => {
     } else if (recordNumAffected === 0) {
         // TODO: Log problem here
         return utils.createErrorResp(
-            { message: "Cart item not found", code: 4000 },
+            [{ message: "Cart item not found", code: 4000 }],
             400
         )
     } else {
         // TODO: Log problem here
-        return utils.createErrorResp({ message: "Internal Server Error" }, 500)
+        return utils.createInternalServerError()
     }
 }
 
@@ -72,12 +72,12 @@ const updateCartItem = async (context, data) => {
     } else if (recordNumAffected === 0) {
         // TODO: Log problem here
         return utils.createErrorResp(
-            { message: "Cart item not found", code: 4000 },
+            [{ message: "Cart item not found", code: 4000 }],
             400
         )
     } else {
         // TODO: Log problem here
-        return utils.createErrorResp({ message: "Internal Server Error" }, 500)
+        return utils.createInternalServerError()
     }
 }
 

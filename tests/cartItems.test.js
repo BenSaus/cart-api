@@ -63,7 +63,7 @@ describe("CartItems", () => {
 
         const body = {
             data: {
-                quantity: 200,
+                quantity: 3,
             },
         }
 
