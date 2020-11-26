@@ -18,7 +18,6 @@ router.post("/", async (req, res) => {
     try {
         resp = await controller.createCart({ db })
     } catch (error) {
-        // TODO: Use logger here instead
         console.error(error)
         resp = utils.createInternalServerError()
     }
@@ -41,7 +40,6 @@ router.get("/:id", getCartValidationRules(), validate, async (req, res) => {
     try {
         resp = await controller.getCart({ db }, req.params.id)
     } catch (error) {
-        // TODO: Use logger here instead
         console.error(error)
         resp = utils.createInternalServerError()
     }

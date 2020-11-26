@@ -32,7 +32,6 @@ router.post(
                 { ...req.body.data, cartId: req.params.id }
             )
         } catch (error) {
-            // TODO: Use logger here instead
             console.error(error)
             resp = utils.createInternalServerError()
         }
@@ -65,7 +64,6 @@ router.delete(
                 { cartItemId: req.params.cartItemId, cartId: req.params.id }
             )
         } catch (error) {
-            // TODO: Use logger here instead
             console.error(error)
             resp = utils.createInternalServerError()
         }
@@ -102,7 +100,6 @@ router.put(
                 }
             )
         } catch (error) {
-            // TODO: Use logger here instead
             console.error(error)
             resp = utils.createInternalServerError()
         }

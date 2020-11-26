@@ -19,8 +19,8 @@
         "supertest": "^6.0.1"
     },
     "scripts": {
-        "start": "node src/app.js",
-        "docker": "docker-compose up",
+        "docker:build": "docker build -t cartapi .",
+        "start": "node src/server/index.js",
         "develop": "nodemon src/server/index.js --watch ./src localhost 4000",
         "test": "cross-env NODE_ENV=test jest"
     },

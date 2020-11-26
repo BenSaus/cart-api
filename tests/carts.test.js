@@ -19,12 +19,6 @@ describe("Cart", () => {
         expect(res.body.data).toHaveProperty("id")
     })
 
-    it("Check new cart is in db", async () => {
-        const res = await request(app).post(`/${constants.VERSION}/carts`)
-
-        // TODO: Check it's in db here....
-    })
-
     it("Get empty cart", async () => {
         const createCartRes = await request(app).post(
             `/${constants.VERSION}/carts`

@@ -15,11 +15,9 @@ const createCart = async (context) => {
 const getCart = async (context, cartId) => {
     const { db } = context
 
-    // TODO: Could use a Promise.all here....
     const respCart = await db.cart.findOne({ where: { id: cartId } })
     const respItems = await db.cartItem.findAll({ where: { cartId: cartId } })
 
-    // TODO: Is this and needed??
     if (respCart !== null && typeof respCart.dataValues !== "undefined") {
         const items = respItems.map((item) => {
             return {

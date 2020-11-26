@@ -5,7 +5,6 @@ const error404 = function (req, res, next) {
 }
 
 const errorResponse = function (err, req, res, next) {
-    // TODO: Use logger here instead!!
     console.error(
         `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
             req.method

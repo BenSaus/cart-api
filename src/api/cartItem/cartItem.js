@@ -4,7 +4,6 @@ const errorCodes = require("../../errorCodes")
 
 const addCartItem = async (context, data) => {
     const { db } = context
-    console.log("Adding cart Item", data)
 
     const cartItem = createCartItem(data)
     const resp = await db.cartItem.create(cartItem)
@@ -25,8 +24,6 @@ const createCartItem = (data) => {
 
 const removeCartItem = async (context, data) => {
     const { db } = context
-    console.log("Removing cart Item", data)
-
     const { cartId, cartItemId } = data
 
     const resp = await db.cartItem.destroy({
@@ -41,7 +38,7 @@ const removeCartItem = async (context, data) => {
             status: 200,
         }
     } else if (recordNumAffected === 0) {
-        // TODO: Log problem here
+        console.error("Cart item not found:", resp)
         return utils.createErrorResp(
             [
                 {
@@ -52,15 +49,13 @@ const removeCartItem = async (context, data) => {
             400
         )
     } else {
-        // TODO: Log problem here
+        console.error("Unexpected response from database:", resp)
         return utils.createInternalServerError()
     }
 }
 
 const updateCartItem = async (context, data) => {
     const { db } = context
-    console.log("Updating cart Item", data)
-
     const { cartId, cartItemId, quantity } = data
 
     const resp = await db.cartItem.update(
@@ -71,12 +66,11 @@ const updateCartItem = async (context, data) => {
     )
 
     const recordNumAffected = resp[0]
-    console.log(recordNumAffected)
 
     if (recordNumAffected === 1) {
         return utils.createEmptyResp(200)
     } else if (recordNumAffected === 0) {
-        // TODO: Log problem here
+        console.error("Cart item not found:", resp)
         return utils.createErrorResp(
             [
                 {
@@ -87,7 +81,7 @@ const updateCartItem = async (context, data) => {
             400
         )
     } else {
-        // TODO: Log problem here
+        console.error("Unexpected response from database:", resp)
         return utils.createInternalServerError()
     }
 }
