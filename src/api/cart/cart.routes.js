@@ -3,7 +3,7 @@ const controller = require("./cart")
 const express = require("express")
 const utils = require("../../utils/response")
 const router = express.Router()
-const { param, body, validationResult } = require("express-validator")
+const { getCartValidationRules, validate } = require("./validator")
 
 /**
  * @api {post} /v1/carts Get new cart
@@ -36,30 +36,18 @@ router.post("/", async (req, res) => {
  *
  * @apiSuccess (200) {Object} mixed `Cart` object
  */
-router.get(
-    "/:id",
-    [param("id", "Invalid cart id").exists().isUUID()],
-    async (req, res) => {
-        let resp
-
-        try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                // TODO: Use logger here instead
-                console.log(errors)
-                res.status(422).json({ errors: errors.array() })
-                return
-            }
-            resp = await controller.getCart({ db }, req.params.id)
-        } catch (error) {
-            // TODO: Use logger here instead
-            console.error(error)
-            resp = utils.createInternalServerError()
-        }
-
-        res.status(resp.status)
-        res.send(resp.body)
+router.get("/:id", getCartValidationRules(), validate, async (req, res) => {
+    let resp
+    try {
+        resp = await controller.getCart({ db }, req.params.id)
+    } catch (error) {
+        // TODO: Use logger here instead
+        console.error(error)
+        resp = utils.createInternalServerError()
     }
-)
+
+    res.status(resp.status)
+    res.send(resp.body)
+})
 
 module.exports = router

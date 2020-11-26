@@ -1,10 +1,14 @@
 const db = require("../../database/models")
 const controller = require("./cartItem")
+const {
+    addCartItemValidationRules,
+    deleteItemValidationRules,
+    updateItemValidationRules,
+    validate,
+} = require("./validator")
 const express = require("express")
 const router = express.Router()
-const { param, body, validationResult } = require("express-validator")
 const utils = require("../../utils/response")
-const constants = require("../../constants")
 
 /**
  * @api {post} /v1/carts/:id/items Add Cart Item
@@ -18,26 +22,11 @@ const constants = require("../../constants")
  */
 router.post(
     "/:id/items",
-    [
-        param("id", "Invalid cart id").exists().isUUID(),
-        body("data", "Data object required").exists(),
-        body("data.productId", "Product id required").exists(),
-        body("data.quantity", "Invalid item quantity").exists().isInt({
-            min: constants.MIN_CART_QUANTITY,
-            max: constants.MAX_CART_QUANTITY,
-        }),
-    ],
+    addCartItemValidationRules(),
+    validate,
     async (req, res) => {
         let resp
         try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                // TODO: Use logger here instead
-                console.log(errors)
-                res.status(422).json({ errors: errors.array() })
-                return
-            }
-
             resp = await controller.addCartItem(
                 { db },
                 { ...req.body.data, cartId: req.params.id }
@@ -66,21 +55,11 @@ router.post(
  */
 router.delete(
     "/:id/items/:cartItemId",
-    [
-        param("id", "Invalid cart id").exists().isUUID(),
-        param("cartItemId", "Invalid cart item id").exists().isUUID(),
-    ],
+    deleteItemValidationRules(),
+    validate,
     async (req, res) => {
         let resp
         try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                // TODO: Use logger here instead
-                console.log(errors)
-                res.status(422).json({ errors: errors.array() })
-                return
-            }
-
             resp = await controller.removeCartItem(
                 { db },
                 { cartItemId: req.params.cartItemId, cartId: req.params.id }
@@ -109,25 +88,11 @@ router.delete(
  */
 router.put(
     "/:id/items/:cartItemId",
-    [
-        param("id", "Invalid cart id").exists().isUUID(),
-        param("cartItemId", "Invalid cart item id").exists().isUUID(),
-        body("data", "Data object required").exists(),
-        body("data.quantity", "Invalid item quantity").exists().isInt({
-            min: constants.MIN_CART_QUANTITY,
-            max: constants.MAX_CART_QUANTITY,
-        }),
-    ],
+    updateItemValidationRules(),
+    validate,
     async (req, res) => {
         let resp
         try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                // TODO: Use logger here instead
-                console.log(errors)
-                res.status(422).json({ errors: errors.array() })
-                return
-            }
             resp = await controller.updateCartItem(
                 { db },
                 {
