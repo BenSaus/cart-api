@@ -1,14 +1,14 @@
 const db = require("../../database/models")
 const controller = require("./cartItem")
+const express = require("express")
+const router = express.Router()
+const utils = require("../../utils/response")
 const {
     addCartItemValidationRules,
     deleteItemValidationRules,
     updateItemValidationRules,
     validate,
-} = require("./validator")
-const express = require("express")
-const router = express.Router()
-const utils = require("../../utils/response")
+} = require("./cartItem.validator")
 
 /**
  * @api {post} /v1/carts/:id/items Add Cart Item

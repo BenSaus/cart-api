@@ -3,7 +3,7 @@ const controller = require("./cart")
 const express = require("express")
 const utils = require("../../utils/response")
 const router = express.Router()
-const { getCartValidationRules, validate } = require("./validator")
+const { getCartValidationRules, validate } = require("./cart.validator")
 
 /**
  * @api {post} /v1/carts Get new cart

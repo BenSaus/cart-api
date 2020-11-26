@@ -1,5 +1,4 @@
-const { body, param, validationResult } = require("express-validator")
-const constants = require("../../constants")
+const { param, validationResult } = require("express-validator")
 
 const getCartValidationRules = () => {
     return [param("id", "Invalid cart id").exists().isUUID()]
