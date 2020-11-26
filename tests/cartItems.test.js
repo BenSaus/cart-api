@@ -58,7 +58,7 @@ describe("CartItems", () => {
         expect(res.body.data.type).toEqual("cartItem")
     })
 
-    it("Change cart item quantity", async () => {
+    it("Update cart item quantity", async () => {
         const { cartId, cartItemId } = await createCartAndItem()
 
         const body = {
@@ -71,6 +71,34 @@ describe("CartItems", () => {
             .put(`/${constants.VERSION}/carts/${cartId}/items/${cartItemId}`)
             .set("Accept", "application/json")
             .send(body)
+
+        expect(res.statusCode).toEqual(200)
+    })
+
+    it("Update cart item, not found error", async () => {
+        const cartId = await createCart()
+        const dummyUUID = "f28ea152-1389-483e-acb7-2b130620ee7c"
+
+        const body = {
+            data: {
+                quantity: 3,
+            },
+        }
+
+        const res = await request(app)
+            .put(`/${constants.VERSION}/carts/${cartId}/items/${dummyUUID}`)
+            .set("Accept", "application/json")
+            .send(body)
+
+        expect(res.statusCode).toEqual(400)
+    })
+
+    it("Remove cart item", async () => {
+        const { cartId, cartItemId } = await createCartAndItem()
+
+        const res = await request(app)
+            .delete(`/${constants.VERSION}/carts/${cartId}/items/${cartItemId}`)
+            .set("Accept", "application/json")
 
         expect(res.statusCode).toEqual(200)
     })

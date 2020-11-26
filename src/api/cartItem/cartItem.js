@@ -1,5 +1,6 @@
 const uuid = require("uuid").v4
 const utils = require("../../utils/response")
+const errorCodes = require("../../errorCodes")
 
 const addCartItem = async (context, data) => {
     const { db } = context
@@ -42,7 +43,12 @@ const removeCartItem = async (context, data) => {
     } else if (recordNumAffected === 0) {
         // TODO: Log problem here
         return utils.createErrorResp(
-            [{ message: "Cart item not found", code: 4000 }],
+            [
+                {
+                    message: "Cart item not found",
+                    code: errorCodes.CART_ITEM_NOT_FOUND,
+                },
+            ],
             400
         )
     } else {
@@ -72,7 +78,12 @@ const updateCartItem = async (context, data) => {
     } else if (recordNumAffected === 0) {
         // TODO: Log problem here
         return utils.createErrorResp(
-            [{ message: "Cart item not found", code: 4000 }],
+            [
+                {
+                    message: "Cart item not found",
+                    code: errorCodes.CART_ITEM_NOT_FOUND,
+                },
+            ],
             400
         )
     } else {

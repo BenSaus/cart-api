@@ -1,5 +1,6 @@
 const uuid = require("uuid").v4
 const utils = require("../../utils/response")
+const errorCodes = require("../../errorCodes")
 
 const createCart = async (context) => {
     const { db } = context
@@ -33,11 +34,11 @@ const getCart = async (context, cartId) => {
         return utils.createResp(responseData, 200)
     } else if (respCart === null) {
         return utils.createErrorResp(
-            [{ message: "Cart item not found", code: 4000 }],
+            [{ message: "Cart not found", code: errorCodes.CART_NOT_FOUND }],
             400
         )
     } else {
-        return utils.createErrorResp({ message: "Internal Server Error" }, 500)
+        return utils.createInternalServerError()
     }
 }
 

@@ -40,6 +40,16 @@ describe("Cart", () => {
         expect(getCartRes.body.data.items.length).toEqual(0)
     })
 
+    it("Get Cart, not found", async () => {
+        const dummyCartId = "07a93fe1-bd5b-4feb-b82b-8d2d718ab1f4"
+
+        const getCartRes = await request(app)
+            .get(`/${constants.VERSION}/carts/${dummyCartId}`)
+            .set("Accept", "application/json")
+        expect(getCartRes.statusCode).toEqual(400)
+        expect(getCartRes.body).toHaveProperty("errors")
+    })
+
     afterAll(async () => {
         await thisDb.sequelize.close()
     })
