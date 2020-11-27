@@ -5,6 +5,8 @@ const errorCodes = require("../../errorCodes")
 const addCartItem = async (context, data) => {
     const { db } = context
 
+    return utils.createInternalServerError()
+
     const cartItem = createCartItem(data)
     const resp = await db.cartItem.create(cartItem)
 
