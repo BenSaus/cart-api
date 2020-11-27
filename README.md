@@ -11,6 +11,6 @@ npm start
 
 ##
 
-HTTP Framework - Express
-Validation - express-validator
-Testing - Jest
+- HTTP Framework - Express
+- Validation - express-validator
+- Testing - Jest
