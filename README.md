@@ -6,5 +6,5 @@ This is basic shopping cart api. The app consists of a SQLite backed ExpressJS s
 
 ```
 git clone https://github.com/BenSaus/simple-cart-api
-npm run docker
+npm start
 ```
