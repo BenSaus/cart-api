@@ -12,6 +12,7 @@ npm start
 ##
 
 - HTTP Framework - Express
+- Database ORM - Sequelize
 - Validation - express-validator
-- Testing - Jest
+- Testing - Jest and SuperTest
 - CI/CD - Github Actions
