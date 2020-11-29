@@ -8,9 +8,12 @@ const addCartItem = async (context, data) => {
     const cartItem = createCartItem(data)
     const resp = await db.cartItem.create(cartItem)
 
-    // TODO: check response here...
-
-    return utils.createResp({ type: "cartItem", ...resp.dataValues }, 201)
+    if (resp.dataValues) {
+        return utils.createResp({ type: "cartItem", ...resp.dataValues }, 201)
+    } else {
+        console.error("Unexpected response from database:", resp)
+        return utils.createInternalServerError()
+    }
 }
 
 const createCartItem = (data) => {
