@@ -9,9 +9,10 @@ git clone https://github.com/BenSaus/simple-cart-api
 npm start
 ```
 
-##
-
+## Stack and Libraries
+- NodeJS
 - HTTP Framework - Express
+- Database - SQLite
 - Database ORM - Sequelize
 - Validation - express-validator
 - Testing - Jest and SuperTest
