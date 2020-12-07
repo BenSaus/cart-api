@@ -6,6 +6,7 @@ This is a basic NodeJs shopping cart api. The app consists of a SQLite backed Ex
 
 ```
 git clone https://github.com/BenSaus/simple-cart-api
+npm install
 npm start
 ```
 
