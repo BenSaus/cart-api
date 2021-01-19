@@ -1,6 +1,6 @@
 # Cart API
 
-This is a basic NodeJs shopping cart api. The app consists of a SQLite backed ExpressJS server with validation, error handling, and containerized with Docker. With the following commands you can install and run the API yourself. Dependancies include Docker, node, and npm.
+This is a REST NodeJs shopping cart API. The app consists of a SQLite backed ExpressJS server with validation, error handling, and containerized with Docker. With the following commands you can install and run the API yourself. Dependancies include Docker, node, and npm.
 
 ## Run API
 
